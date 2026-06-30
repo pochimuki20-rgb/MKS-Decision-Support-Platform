@@ -1,20 +1,63 @@
-# MKS-HAI-ARCH-0003 Context Contract Design
+# MKS-HAI-ARCH-0003 Contract Specification
 
 **Status:** In Progress  
-**Scope:** Context Contract Design  
+**Scope:** Contract Specification  
 **Depends on:** ARCH-0001 / ARCH-0002
 
 ---
 
 ## 1. Purpose
 
-This document defines the Context Contracts used by MKS Decision Support Platform and MKS Horse AI.
+This document defines the Contract model used by MKS Decision Support Platform and MKS Horse AI.
 
-The purpose is to separate race identity, race participant data, day-of-race conditions, and user decision conditions.
+ARCH-0003 is divided into:
+
+- ARCH-0003-A: Input Contracts
+- ARCH-0003-B: Output Contracts
+
+Input Contracts define race identity, race participant data, day-of-race conditions, and user decision conditions.
+
+Output Contracts define evaluation results, decision results, review results, confidence results, and final presentation.
 
 ---
 
-## 2. Common Principles
+## 2. Contract Taxonomy
+
+Contract Taxonomy defines how each Contract should be understood and classified.
+
+| Category | Purpose |
+| --- | --- |
+| Identity Contract | Identifies the target uniquely. |
+| Snapshot Contract | Holds state at a specific point in time. |
+| Context Contract | Holds assumptions and decision context. |
+| Evaluation Contract | Holds analysis and evaluation results. |
+| Decision Contract | Holds decision results. |
+| Review Contract | Holds quality check and consistency review results. |
+| Presentation Contract | Holds final user-facing output. |
+
+### Current Contract Categories
+
+| Contract | Category |
+| --- | --- |
+| RaceContext | Identity Contract |
+| RaceData | Snapshot Contract |
+| RaceCondition | Snapshot Contract |
+| UserContext | Context Contract |
+| AnalysisResult | Evaluation Contract |
+| DecisionResult | Decision Contract |
+| ReviewResult | Review Contract |
+| ConfidenceResult | Review Contract / Decision Quality |
+| FinalResponse | Presentation Contract |
+
+### Future Extension Note
+
+ConfidenceResult is treated as a Review-related Contract in v1.0.
+
+In future versions, it may be separated as an Assessment Contract if uncertainty, data quality, or model applicability are evaluated independently.
+
+---
+
+## 3. Common Principles
 
 ### Minimal Context Principle
 
@@ -48,7 +91,7 @@ If a change is required, create a new version or snapshot.
 
 ---
 
-## 3. Contract Overview
+## 4. ARCH-0003-A Input Contracts
 
 | Contract | Type | Status |
 | --- | --- | --- |
@@ -59,7 +102,7 @@ If a change is required, create a new version or snapshot.
 
 ---
 
-## 4. RaceContext v1.0
+## 5. RaceContext v1.0
 
 **Owner Layer:** User Layer  
 **Purpose:** Identify the race to be analyzed and provide the base context for downstream layers.  
@@ -93,7 +136,7 @@ These belong to RaceData, RaceCondition, or UserContext.
 
 ---
 
-## 5. RaceData v1.0
+## 6. RaceData v1.0
 
 **Type:** Snapshot  
 **Owner Layer:** User Layer / Data Provider  
@@ -142,7 +185,7 @@ It does not hold weather, track condition, paddock data, user preferences, or an
 
 ---
 
-## 6. RaceCondition v1.0
+## 7. RaceCondition v1.0
 
 **Type:** Snapshot  
 **Owner Layer:** User Layer / Data Provider  
@@ -192,7 +235,7 @@ Potential fields:
 
 ---
 
-## 7. UserContext v1.0
+## 8. UserContext v1.0
 
 **Type:** Context  
 **Owner Layer:** User Layer  
@@ -230,13 +273,29 @@ It is a contract for adjusting decision-making, not for changing race evaluation
 
 ---
 
-## 8. Current Completion Status
+## 9. ARCH-0003-B Output Contracts
+
+ARCH-0003-B will define the following Output Contracts:
+
+- AnalysisResult
+- DecisionResult
+- ReviewResult
+- ConfidenceResult
+- FinalResponse
+
+---
+
+## 10. Current Completion Status
 
 ```text
+ARCH-0003-A Input Contracts
 RaceContext v1.0      Approved Draft
 RaceData v1.0         Approved Draft
 RaceCondition v1.0    Approved Draft
 UserContext v1.0      Approved Draft
+
+ARCH-0003-B Output Contracts
+Pending
 ```
 
-ARCH-0003-A Context Contract Design is ready for completion review.
+ARCH-0003-A Input Contract Design is ready for completion review.
