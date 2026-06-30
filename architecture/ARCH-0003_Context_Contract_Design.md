@@ -139,3 +139,104 @@ These belong to RaceData, RaceCondition, or UserContext.
 RaceData holds only race participant data.
 
 It does not hold weather, track condition, paddock data, user preferences, or analysis results.
+
+---
+
+## 6. RaceCondition v1.0
+
+**Type:** Snapshot  
+**Owner Layer:** User Layer / Data Provider  
+**Purpose:** Hold a snapshot of day-of-race condition data corresponding to RaceContext.  
+**Version:** 1.0  
+**Immutable:** Yes  
+**Status:** Approved Draft
+
+### Required Fields
+
+- race_context_id
+- snapshot_id
+- snapshot_time
+
+### Optional Fields
+
+- weather
+- track_condition
+- turf_condition
+- dirt_condition
+- wind
+- temperature
+- paddock_input
+- paddock_notes
+- source
+- data_completeness
+
+### Responsibility
+
+RaceCondition holds day-of-race condition data.
+
+It does not hold entrants, user preferences, or analysis results.
+
+### Future Extension Note
+
+Paddock information is included in RaceCondition v1.0 for simplicity.
+
+In future versions, horse-level observation data may be separated into PaddockSnapshot.
+
+Potential fields:
+
+- horse_number
+- paddock_input
+- paddock_notes
+- evaluator
+- evaluation_time
+
+---
+
+## 7. UserContext v1.0
+
+**Type:** Context  
+**Owner Layer:** User Layer  
+**Purpose:** Hold user decision conditions such as budget, preferred bet type, risk tolerance, and race policy.  
+**Version:** 1.0  
+**Immutable:** Yes  
+**Status:** Approved Draft
+
+### Required Fields
+
+- user_context_id
+- created_at
+
+### Optional Fields
+
+- budget
+- preferred_bet_type
+- risk_tolerance
+- target_race_policy
+- bet_unit
+- max_tickets
+- preferred_strategy
+- avoid_strategy
+- user_notes
+
+### Responsibility
+
+UserContext does not modify AnalysisResult.
+
+UserContext may influence DecisionResult.
+
+UserContext may influence Betting Review.
+
+It is a contract for adjusting decision-making, not for changing race evaluation.
+
+---
+
+## 8. Current Completion Status
+
+```text
+RaceContext v1.0      Approved Draft
+RaceData v1.0         Approved Draft
+RaceCondition v1.0    Approved Draft
+UserContext v1.0      Approved Draft
+```
+
+ARCH-0003-A Context Contract Design is ready for completion review.
